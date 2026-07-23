@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 
-An open-source Codex workflow for preparing Xiaohongshu/RedNote image posts locally: planning, copy, image ordering, privacy checks, and a manual publishing handoff.
+An open-source Codex workflow for creating dated calendar cards and no-date heartfelt albums locally, with copy, privacy checks, and a manual publishing handoff.
 
 **It prepares the content, but it never logs in, uploads, or publishes for you.**
 
@@ -18,15 +18,26 @@ This project turns those steps into a reusable, verifiable, local-only workflow.
 
 ## Example output
 
-This original sample shows a local `1 cover + 6 inner cards` workflow. The scenery was generated and all editorial copy is original.
+### Dated calendar cards
 
-![Freedom album overview](docs/assets/examples/freedom-album-overview.png)
+The calendar Skill supports ordinary dates and exact-day solar-term cards. Date, weekday, lunar, and solar-term labels are reviewed before rendering.
 
 <p align="center">
-  <img src="docs/assets/examples/freedom-album-cover.png" alt="Freedom album cover" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="Freedom album first inner card" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-06.png" alt="Freedom album final inner card" width="31%">
+  <img src="docs/assets/examples/calendar-2026-07-22.png" alt="Dated calendar card for July 22, 2026" width="46%">
+  <img src="docs/assets/examples/calendar-2026-07-23-solar-term.png" alt="Major Heat calendar card for July 23, 2026" width="46%">
 </p>
+
+### No-date heartfelt albums
+
+The album Skill defaults to `1 cover + 6 inner cards` and supports photo-paper or full-bleed handwritten layouts.
+
+<p align="center">
+  <img src="docs/assets/examples/photo-paper-album-cover.png" alt="Photo-paper album cover" width="31%">
+  <img src="docs/assets/examples/freedom-album-cover.png" alt="Full-bleed handwritten album cover" width="31%">
+  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="Full-bleed handwritten album inner card" width="31%">
+</p>
+
+![Freedom album overview](docs/assets/examples/freedom-album-overview.png)
 
 See [example provenance and checks](docs/EXAMPLES.en.md) for dimensions, safety review, and SHA-256 values.
 
@@ -40,7 +51,17 @@ See [example provenance and checks](docs/EXAMPLES.en.md) for dimensions, safety 
 - Generate `handoff.md` and `manifest.json` for manual copy and upload.
 - Use Simplified Chinese by default or switch to English when requested.
 
-## Included Skills
+## Two core creation Skills
+
+### `rednote-dated-calendar`
+
+Creates a verified 3:4 photo-paper calendar card for one exact date. It validates the Gregorian date and weekday, requires human review of lunar and solar-term labels, prepares copy and an image prompt, emits HTML, and can render a `1242 × 1656` PNG through local Chrome.
+
+### `rednote-heartfelt-album`
+
+Turns one specific feeling or life scene into a seven-card carousel: `1 cover + 6 inner cards`, three title directions, caption, topics, per-card image prompts, source checks, and optional local HTML/PNG rendering.
+
+## Two supporting safety Skills
 
 ### `rednote-content-pack`
 
@@ -71,6 +92,11 @@ $HOME/.agents/skills/
 See [Installation](docs/INSTALL.en.md) for details.
 
 ## Example prompts
+
+```text
+Create a verified local calendar card for July 23, 2026.
+Check the weekday and require review of the lunar and solar-term labels.
+```
 
 ```text
 Create a seven-card Xiaohongshu album about slowing down.

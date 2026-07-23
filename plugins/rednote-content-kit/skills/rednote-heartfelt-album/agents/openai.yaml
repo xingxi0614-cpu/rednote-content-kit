@@ -1,0 +1,4 @@
+interface:
+  display_name: "一句话走心图集"
+  short_description: "把一个具体情绪或生活场景变成可发布的七页小红书走心图集"
+  default_prompt: "Use $rednote-heartfelt-album to turn one feeling or life scene into a seven-page local-only RedNote carousel."

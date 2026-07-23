@@ -1,0 +1,36 @@
+:root {
+  --paper: #f6f1e9;
+  --ink: #25211d;
+  --muted: #71675c;
+  --accent: #ad493d;
+  --line: #ded3c5;
+  --visual-a: #bfae9c;
+  --visual-b: #6f746f;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1242px; height: 1656px; overflow: hidden; }
+body { background: #e6dfd4; font-family: "PingFang SC", "Noto Sans SC", sans-serif; }
+.stage { width: 1242px; height: 1656px; display: grid; place-items: center; }
+.card { width: 1156px; height: 1568px; overflow: hidden; border-radius: 12px; background: var(--paper); box-shadow: 0 20px 50px rgba(44,38,28,.16); }
+.visual { height: 874px; background-position: center; background-size: cover; background-repeat: no-repeat; position: relative; }
+.visual.placeholder { background: linear-gradient(145deg, var(--visual-a), var(--visual-b)); }
+.visual.placeholder::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 24% 22%, rgba(255,255,255,.26), transparent 33%), linear-gradient(to top, rgba(20,18,16,.12), transparent 55%); }
+.paper { height: 694px; color: var(--ink); background: var(--paper); }
+.kicker { color: var(--accent); font-size: 23px; font-weight: 650; }
+.cover .visual { height: 930px; }
+.cover .paper { height: 638px; padding: 62px 84px; }
+.cover h1 { margin: 22px 0 0; max-width: 940px; font-family: "Songti SC", "Noto Serif SC", serif; font-size: 76px; line-height: 1.2; font-weight: 900; }
+.cover .subtitle { margin-top: 30px; max-width: 900px; font-family: "Songti SC", "Noto Serif SC", serif; font-size: 31px; line-height: 1.6; color: var(--muted); }
+.cover .rule { width: 62px; height: 2px; margin-top: 34px; background: var(--accent); }
+.inner .paper { display: grid; grid-template-columns: minmax(0,1fr) 168px; gap: 38px; padding: 64px 74px 62px 84px; }
+.inner h1 { margin: 22px 0 0; max-width: 750px; font-family: "Songti SC", "Noto Serif SC", serif; font-size: 62px; line-height: 1.24; font-weight: 900; }
+.support { margin-top: 34px; max-width: 760px; font-family: "Songti SC", "Noto Serif SC", serif; font-size: 29px; line-height: 1.62; color: var(--muted); }
+.source { display: block; margin-top: 16px; color: var(--accent); font-family: "Songti SC", "Noto Serif SC", serif; font-size: 24px; }
+.page-mark { border-left: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+.number { font-family: Georgia, serif; font-size: 110px; line-height: .9; }
+.total { margin-top: 20px; color: #948a7f; font-family: Georgia, serif; font-size: 20px; }
+.series { margin-top: 28px; color: #887e73; font-family: "Songti SC", serif; font-size: 21px; line-height: 1.5; text-align: center; }
+.palette-forest { --accent:#56664f; --visual-a:#a9b39d; --visual-b:#536052; }
+.palette-night { --accent:#926f64; --visual-a:#5d6170; --visual-b:#242b38; }
+.palette-ocean { --accent:#4f6f79; --visual-a:#a9c5c7; --visual-b:#506f78; }

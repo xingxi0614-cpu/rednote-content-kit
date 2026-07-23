@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "package_type": "heartfelt-xhs-album",
+  "slug": "quiet-restart",
+  "series": "一句话走心图集",
+  "theme": "允许自己慢一点",
+  "volume": "VOL. 01",
+  "palette": "clay",
+  "cover": {
+    "headline": "这 6 句话，\n送给想重新开始的你",
+    "subtitle": "不用突然变好，先把今天过稳。",
+    "photo_prompt": "quiet early-morning apartment window, soft natural light, a tiny human silhouette, generous negative space, believable 35mm film grain, horizontal 4:3, no text, no logo, no watermark"
+  },
+  "slides": [
+    {
+      "headline": "你不是停住了，\n只是走得很累",
+      "support_line": "先承认疲惫，比逼自己振作更接近重新出发。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "empty bus stop after light rain, small distant figure, muted warm gray, natural cinematic light, horizontal 4:3, no text, no logo, no watermark"
+    },
+    {
+      "headline": "慢一点，\n不等于落后",
+      "support_line": "人生不是统一发令的赛道，你可以按自己的呼吸往前走。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "wide coastal walking path at dawn, tiny person walking slowly, calm blue and beige palette, horizontal 4:3, no text, no logo, no watermark"
+    },
+    {
+      "headline": "今天只做一件\n能完成的小事",
+      "support_line": "把目标缩小，行动才有地方落脚。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "simple wooden desk with one open notebook and warm tea, morning window light, quiet negative space, horizontal 4:3, no text, no logo, no watermark"
+    },
+    {
+      "headline": "别急着证明\n自己已经没事",
+      "support_line": "恢复不是表演，你可以把力气先留给生活。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "dim bedroom with curtains moving in a soft breeze, no visible face, gentle film grain, horizontal 4:3, no text, no logo, no watermark"
+    },
+    {
+      "headline": "重新开始，\n也可以没有仪式感",
+      "support_line": "好好吃一顿饭、收拾桌面、早点睡，都是开始。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "small home dinner table for one, warm practical light, ordinary lived-in details, horizontal 4:3, no text, no logo, no watermark"
+    },
+    {
+      "headline": "先把今天过稳，\n明天自然会来",
+      "support_line": "如果你也在慢慢恢复，就把这一页留给自己。",
+      "source_type": "original",
+      "source_label": "原创",
+      "photo_prompt": "wide evening sky over quiet residential rooftops, tiny lit window, calm hopeful atmosphere, horizontal 4:3, no text, no logo, no watermark"
+    }
+  ]
+}

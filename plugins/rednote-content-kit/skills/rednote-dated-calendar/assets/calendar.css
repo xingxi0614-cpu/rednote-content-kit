@@ -1,0 +1,17 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1242px; height: 1656px; overflow: hidden; background: #ebe5d9; }
+body { font-family: "Noto Sans SC", "PingFang SC", "Heiti SC", Arial, sans-serif; }
+.stage { width: 1242px; height: 1656px; display: flex; align-items: center; justify-content: center; background: #ebe5d9; }
+.card { width: 1156px; height: 1568px; overflow: hidden; border-radius: 10px; background: #f5f0e8; box-shadow: 0 20px 48px rgba(44,38,28,.16), 0 2px 8px rgba(44,38,28,.08); }
+.photo { height: 990px; background-position: center; background-size: cover; background-repeat: no-repeat; background-color: #cdd5c6; }
+.paper { height: 578px; display: grid; grid-template-columns: minmax(0,1fr) 270px; gap: 42px; padding: 82px 86px 70px; color: #26221d; }
+.copy { padding-right: 28px; }
+.headline { font-family: "Noto Serif SC","Songti SC",serif; font-size: 70px; line-height: 1.24; font-weight: 900; color: #211d19; }
+.support { margin-top: 46px; font-family: "Noto Serif SC","Songti SC",serif; font-size: 28px; line-height: 1.72; color: #675f54; }
+.source { margin-left: 18px; color: #b63a2d; white-space: nowrap; }
+.date { border-left: 1px solid #e2d8ca; display: flex; flex-direction: column; align-items: center; padding-top: 6px; color: #2b2722; }
+.day { font-family: "Cormorant Garamond",Georgia,serif; font-size: 132px; line-height: .9; font-weight: 500; }
+.weekday { margin-top: 22px; font-family: "Noto Serif SC","Songti SC",serif; font-size: 30px; font-weight: 700; }
+.ym { margin-top: 24px; font-family: Georgia,serif; font-size: 22px; letter-spacing: 6px; color: #9a9186; }
+.lunar { margin-top: 24px; font-size: 23px; letter-spacing: 3px; color: #9a9186; text-align: center; }
+.term { margin-top: 24px; padding: 7px 18px 8px; border: 1px solid #d89a8b; border-radius: 4px; color: #c44638; font-size: 22px; letter-spacing: 4px; }

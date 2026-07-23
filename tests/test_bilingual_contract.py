@@ -32,7 +32,12 @@ class BilingualContractTests(unittest.TestCase):
         self.assertTrue(all("中文" in prompt for prompt in interface["defaultPrompt"]))
 
     def test_skills_share_the_language_contract(self):
-        for skill in ("rednote-content-pack", "rednote-manual-publish-guard"):
+        for skill in (
+            "rednote-dated-calendar",
+            "rednote-heartfelt-album",
+            "rednote-content-pack",
+            "rednote-manual-publish-guard",
+        ):
             text = (
                 ROOT / f"plugins/rednote-content-kit/skills/{skill}/SKILL.md"
             ).read_text(encoding="utf-8")

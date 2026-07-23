@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 
-一个面向 Codex 的开源内容工作流：在本地完成小红书 / RedNote 图文策划、文案整理、图片排序、隐私校验和人工发布交付包。
+一个面向 Codex 的开源内容工作流：在本地完成带日期的日历日签、无日期走心图集、文案整理、隐私校验和人工发布交付包。
 
 **它帮助你把内容准备好，但不会代替你登录、上传或发布。**
 
@@ -18,15 +18,26 @@
 
 ## 效果展示
 
-下面是原创的 `1 张封面 + 6 张内页` 本地示例。自然场景由图片生成流程制作，文字为原创编辑文案。
+### 日期日历日签
 
-![自由感图集总览](docs/assets/examples/freedom-album-overview.png)
+同一套 Skill 同时支持普通日期和“日期恰好为节气当天”的日历卡。日期、星期、农历和节气标签需要在渲染前逐项核验。
 
 <p align="center">
-  <img src="docs/assets/examples/freedom-album-cover.png" alt="自由感图集封面" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="自由感图集内页一" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-06.png" alt="自由感图集末页" width="31%">
+  <img src="docs/assets/examples/calendar-2026-07-22.png" alt="2026年7月22日日期日历日签" width="46%">
+  <img src="docs/assets/examples/calendar-2026-07-23-solar-term.png" alt="2026年7月23日大暑日历日签" width="46%">
 </p>
+
+### 无日期走心图集
+
+图集 Skill 默认生成 `1 张封面 + 6 张内页`，可使用相纸排版或全幅手写排版。下面均为本地示例。
+
+<p align="center">
+  <img src="docs/assets/examples/photo-paper-album-cover.png" alt="相纸排版图集封面" width="31%">
+  <img src="docs/assets/examples/freedom-album-cover.png" alt="全幅手写图集封面" width="31%">
+  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="全幅手写图集内页" width="31%">
+</p>
+
+![自由感图集总览](docs/assets/examples/freedom-album-overview.png)
 
 图片来源、安全复核、尺寸和 SHA-256 见：[示例说明](docs/EXAMPLES.md)｜[English](docs/EXAMPLES.en.md)。
 
@@ -40,7 +51,17 @@
 - 输出 `handoff.md` 和 `manifest.json`，方便用户人工复制与上传。
 - 默认输出简体中文，明确要求时支持英文。
 
-## 两个 Skill
+## 两个核心创作 Skill
+
+### `rednote-dated-calendar`
+
+把一个准确日期做成 3:4 相纸日历卡。流程会核对公历日期与星期，要求人工复核农历和节气，生成标题、文案、图片提示词、HTML，并可通过本机 Chrome 导出 `1242 × 1656` PNG。
+
+### `rednote-heartfelt-album`
+
+把一个具体情绪或生活场景做成完整七页图集：`1 张封面 + 6 张内页`、三个标题方向、正文、话题、逐页图片提示词、引用来源审计，以及可选的本地 HTML/PNG 渲染。
+
+## 两个辅助安全 Skill
 
 ### `rednote-content-pack`
 
@@ -73,6 +94,11 @@ $HOME/.agents/skills/
 ## 使用示例
 
 安装后可以直接提出类似请求：
+
+```text
+帮我做一张 2026-07-23 的大暑日历日签，核对星期、农历和节气，
+默认中文，生成本地图片和可复制文案，不操作小红书。
+```
 
 ```text
 帮我做一组“慢一点也没关系”的小红书图集，默认中文，
@@ -146,6 +172,8 @@ python3 tools/audit_release.py .
 .agents/plugins/marketplace.json
 plugins/rednote-content-kit/
   .codex-plugin/plugin.json
+  skills/rednote-dated-calendar/
+  skills/rednote-heartfelt-album/
   skills/rednote-content-pack/
   skills/rednote-manual-publish-guard/
 docs/

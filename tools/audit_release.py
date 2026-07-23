@@ -12,10 +12,13 @@ from pathlib import Path
 
 TEXT_SUFFIXES = {".md", ".txt", ".json", ".yaml", ".yml", ".py", ".js", ".mjs", ".css", ".toml"}
 REVIEWED_EXAMPLE_IMAGES = {
+    "docs/assets/examples/calendar-2026-07-22.png": (1242, 1656),
+    "docs/assets/examples/calendar-2026-07-23-solar-term.png": (1242, 1656),
     "docs/assets/examples/freedom-album-cover.png": (1242, 1656),
     "docs/assets/examples/freedom-album-overview.png": (1440, 980),
     "docs/assets/examples/freedom-album-slide-01.png": (1242, 1656),
     "docs/assets/examples/freedom-album-slide-06.png": (1242, 1656),
+    "docs/assets/examples/photo-paper-album-cover.png": (1242, 1656),
 }
 BLOCKED_NAMES = {".DS_Store", ".env", "id_rsa", "id_ed25519"}
 BLOCKED_SUFFIXES = {".pyc", ".pyo", ".pem", ".key", ".p12", ".pfx", ".zip", ".tar", ".gz"}

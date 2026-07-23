@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Added the two missing first-class creation Skills: `rednote-dated-calendar` and `rednote-heartfelt-album`.
+- Added deterministic local HTML/PNG renderers, schemas, templates, and Chinese-first prompts for both modes.
+- Kept the existing handoff builder and manual publishing guard as supporting safety tools.
+- Prepared dated-calendar and photo-paper album examples for a separate rights-approved public update.
+
 ## 0.1.0 — 2026-07-22
 
 - Created a privacy-first local-only plugin with two skills.

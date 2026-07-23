@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package_type": "dated-rednote-calendar",
+  "slug": "quiet-summer-day",
+  "date": "2026-07-22",
+  "weekday": "星期三",
+  "lunar": "请核验后填写",
+  "term": "",
+  "headline": "给今天留一点风",
+  "support_line": "先停一会，也算在照顾生活。",
+  "source_type": "original",
+  "source_label": "原创",
+  "photo_path": "",
+  "photo_position": "center",
+  "photo_prompt": "quiet summer shade, natural light, restrained film grain, horizontal 4:3 clean photograph, no text, no logo, no watermark"
+}
