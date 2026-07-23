@@ -36,6 +36,8 @@ Installation instructions retain `OWNER/REPOSITORY` until a final public-safe pu
 
 Status: expected pre-release state.
 
+Update: the private candidate now exists at `xingxi0614-cpu/rednote-content-kit`, so installation placeholders have been replaced. The public-release identity is still subject to final approval.
+
 ## Verified controls
 
 - Input paths must be relative, cannot traverse parents, must stay inside the specification root, and cannot be symlinks (`build_handoff.py`, path validation section).
@@ -44,6 +46,7 @@ Status: expected pre-release state.
 - Generated manifests contain copied relative image paths and SHA-256 hashes rather than source-machine paths.
 - Release auditing rejects caches, key material, archives, personal home paths, common credential formats, platform creator URLs, removed upload adapters, and browser automation dependencies.
 - CI has read-only repository permissions and pins third-party Actions to reviewed commit SHAs.
+- The private GitHub candidate has Dependabot vulnerability alerts and automated security fixes enabled. Secret scanning, push protection, and private vulnerability reporting were not available for the current private repository; this limitation is recorded in `docs/RELEASE.md` and does not weaken the local release gate.
 - No telemetry, network calls, platform credentials, login, upload, draft, scheduling, publishing, comment, or message features are included.
 
 ## Verification commands

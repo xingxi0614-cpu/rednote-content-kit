@@ -21,4 +21,13 @@
 13. Obtain current explicit approval before changing visibility to public or publishing a release.
 14. Tag the verified commit as `v0.1.0`; attach only artifacts built from that commit.
 
+## Current private-candidate hosting status
+
+- Private repository: `xingxi0614-cpu/rednote-content-kit`.
+- Dependabot vulnerability alerts: enabled.
+- Dependabot automated security fixes: enabled.
+- GitHub secret scanning and push protection: unavailable for this repository while private on the current account plan; the API returned HTTP 422. Recheck availability before any visibility change.
+- Private vulnerability reporting: unavailable for the current private repository; the API returned HTTP 404. Recheck after any future public-release approval.
+- Local release audit and final human diff review remain mandatory regardless of GitHub feature availability.
+
 Never rewrite history to hide a leaked secret. Revoke or rotate the secret first, then remove it from history and verify the remediation.

@@ -68,7 +68,7 @@ python3 tools/audit_release.py . --release
 Once this repository is public and the release hold has been removed:
 
 ```bash
-codex plugin marketplace add OWNER/REPOSITORY
+codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
 ```
 
 Then restart the ChatGPT desktop app, open Plugins, choose the Rednote Content Kit marketplace, and install the plugin. See `docs/INSTALL.md` for manual installation.

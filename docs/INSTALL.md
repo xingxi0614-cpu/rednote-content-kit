@@ -3,7 +3,7 @@
 ## Plugin installation after public release
 
 ```bash
-codex plugin marketplace add OWNER/REPOSITORY
+codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
 ```
 
 Restart the ChatGPT desktop app, open Plugins, select the repository marketplace, and install Rednote Content Kit.
