@@ -22,10 +22,10 @@ This file records the release controls for `xingxi0614-cpu/rednote-content-kit`.
 
 ## Post-visibility checks
 
-- [ ] Confirm anonymous repository, README, image, clone, and ZIP access.
-- [ ] Enable GitHub secret scanning and push protection when available.
-- [ ] Enable private vulnerability reporting when available.
-- [ ] Confirm Dependabot vulnerability alerts and automated security fixes.
+- [x] Confirm anonymous repository, README, image, clone, and ZIP access.
+- [x] Enable GitHub secret scanning and push protection.
+- [x] Enable private vulnerability reporting.
+- [x] Confirm Dependabot vulnerability alerts and automated security fixes.
 - [ ] Confirm GitHub Actions succeeds on the public release commit.
 - [ ] Create and verify the `v0.1.0` tag from the approved commit.
 

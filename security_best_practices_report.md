@@ -16,11 +16,7 @@ None found.
 
 ## Medium
 
-### SEC-001 — GitHub public security features require post-visibility verification
-
-Secret scanning, push protection, and private vulnerability reporting were not available while the repository was private. The release procedure requires enabling each available feature immediately after public visibility and recording the actual result.
-
-Status: pending post-visibility verification; does not bypass the passing local release audit.
+None open.
 
 ## Resolved release decisions
 
@@ -33,6 +29,12 @@ Status: resolved on 2026-07-22.
 ### SEC-003 — Publisher, repository, and asset rights
 
 The owner approved `xingxi0614-cpu/rednote-content-kit` for public visibility and confirmed the right to publish the code, documentation, original copy, and four reviewed example images. Commit metadata uses the GitHub-provided `noreply` identity.
+
+Status: resolved on 2026-07-22.
+
+### SEC-004 — GitHub public security controls
+
+Anonymous repository, README, example-image, Git clone, and source-ZIP access were verified after the visibility change. GitHub secret scanning, push protection, private vulnerability reporting, Dependabot vulnerability alerts, and automated security fixes are enabled.
 
 Status: resolved on 2026-07-22.
 
