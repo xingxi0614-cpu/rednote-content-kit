@@ -2,7 +2,7 @@
   "name": "rednote-content-kit",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "默认使用中文生成隐私安全、纯本地的小红书图片与文案交付包，同时支持英文。",
+  "description": "默认中文、支持英文的本地小红书图文工作流：内容简报、标题正文、图片排序、隐私校验与人工发布交付包。",
   "author": {
     "name": "Rednote Content Kit Contributors"
   },
@@ -10,8 +10,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "小红书本地内容工具包",
-    "shortDescription": "默认中文，生成本地图片、文案和人工交付包。",
-    "longDescription": "默认使用简体中文在本地规划、校验和打包小红书内容，也支持按用户要求输出英文。插件不会登录、上传、存草稿、发布或处理平台凭证。",
+    "shortDescription": "本地完成策划、文案、图片排序和人工交付。",
+    "longDescription": "默认使用简体中文，也支持英文。在本地完成内容简报、图文策划、标题正文、话题、图片排序、隐私校验和人工发布交付包。插件不会登录、上传、存草稿、发布或处理平台凭证。",
     "developerName": "Rednote Content Kit Contributors",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],

@@ -2,7 +2,7 @@
 
 [简体中文（默认）](INSTALL.md) | [English](INSTALL.en.md)
 
-## 公开发布后的 Plugin 安装
+## Plugin 安装
 
 ```bash
 codex plugin marketplace add xingxi0614-cpu/rednote-content-kit

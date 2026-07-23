@@ -2,17 +2,23 @@
 
 [简体中文（默认）](README.md) | [English](README.en.md)
 
-> Pre-release security candidate. **Do not publish this repository until `RELEASE-HOLD.md` is cleared.** The project license has been selected, but patent, ownership, privacy, and publisher checks remain mandatory.
+[![CI](https://github.com/xingxi0614-cpu/rednote-content-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/xingxi0614-cpu/rednote-content-kit/actions/workflows/ci.yml)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 
-Rednote Content Kit is a privacy-first Codex plugin for preparing Xiaohongshu/RedNote image-and-copy packages locally. It deliberately excludes browser automation, account login, upload, draft saving, scheduling, publishing, comment replies, direct messages, and credential handling.
+An open-source Codex workflow for preparing Xiaohongshu/RedNote image posts locally: planning, copy, image ordering, privacy checks, and a manual publishing handoff.
 
-## Language
+**It prepares the content, but it never logs in, uploads, or publishes for you.**
 
-Simplified Chinese is the default for Skill responses and generated handoff files. Set `"language": "en"` in the package spec, or explicitly request English, to generate an English handoff with the same safety boundary.
+## Why this project exists
+
+Image-post creation involves more than writing a caption. Common failures include incorrect image order, copy that does not match the visuals, excessive topics, unreliable attribution, leaked local paths, or handing account credentials to automation.
+
+This project turns those steps into a reusable, verifiable, local-only workflow. The output is a set of images, copy-ready text, a JSON manifest, and a manual checklist, while the user keeps control of the account.
 
 ## Example output
 
-The following original sample demonstrates a local `1 cover + 6 inner cards` workflow. It contains generated scenery and original editorial copy. It is included only to show the visual result; it was not uploaded to or published on any platform.
+This original sample shows a local `1 cover + 6 inner cards` workflow. The scenery was generated and all editorial copy is original.
 
 ![Freedom album overview](docs/assets/examples/freedom-album-overview.png)
 
@@ -22,69 +28,100 @@ The following original sample demonstrates a local `1 cover + 6 inner cards` wor
   <img src="docs/assets/examples/freedom-album-slide-06.png" alt="Freedom album final inner card" width="31%">
 </p>
 
-See `docs/EXAMPLES.en.md` for provenance, safety review, dimensions, and checksums.
+See [example provenance and checks](docs/EXAMPLES.en.md) for dimensions, safety review, and SHA-256 values.
 
-## What it includes
+## Features
 
-- `rednote-content-pack`: creates content briefs, image plans, copy, topics, and a deterministic manual handoff package.
-- `rednote-manual-publish-guard`: converts requests to upload or publish into a manual checklist without accessing the platform.
-- A local handoff builder that copies only explicitly listed images and emits relative paths.
-- Privacy, security, contribution, commercialization, patent, release, and incident-response documentation.
-- A platform-compliance checklist that keeps all account actions manual and requires current rule review.
-- CI checks for tests, credentials, personal paths, prohibited platform automation, caches, and unsafe release state.
+- Build a content brief covering audience, scene, objective, evidence, and intended next action.
+- Plan dated cards, single-image notes, or no-date albums.
+- Prepare recommended and alternative titles, captions, topics, and a comment starter.
+- Validate image type and order, topic limits, attribution, and copy-image consistency.
+- Copy only selected images into a clean handoff directory with relative paths and SHA-256 hashes.
+- Generate `handoff.md` and `manifest.json` for manual copy and upload.
+- Use Simplified Chinese by default or switch to English when requested.
 
-## Safety properties
+## Included Skills
 
-- No Xiaohongshu/RedNote API, browser driver, cookie, token, password, or login support.
-- No telemetry or outbound network calls.
-- No bundled user images, analytics, account names, conversation history, or machine-specific paths.
-- Generated handoff manifests contain relative copied paths, not the source machine's absolute paths.
-- The source is prepared under the MIT License; public release remains blocked until the patent and remaining release decisions are recorded.
+### `rednote-content-pack`
 
-## Repository layout
+Creates the complete local content and handoff package: brief, image plan, titles, caption, topics, image order, validation, and packaged output.
 
-```text
-.agents/plugins/marketplace.json
-plugins/rednote-content-kit/
-  .codex-plugin/plugin.json
-  skills/rednote-content-pack/
-  skills/rednote-manual-publish-guard/
-docs/
-  assets/examples/
-examples/
-tests/
-tools/
+### `rednote-manual-publish-guard`
+
+Converts requests to upload, save drafts, schedule, or publish into a safe manual checklist without accessing the platform or account credentials.
+
+## Installation
+
+### Install as a Codex Plugin
+
+```bash
+codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
 ```
 
-## Local validation
+Restart the ChatGPT desktop app, open Plugins, select Rednote Content Kit, and install it.
+
+### Install a Skill manually
+
+Copy the required Skill directory from `plugins/rednote-content-kit/skills/` into:
+
+```text
+$HOME/.agents/skills/
+```
+
+See [Installation](docs/INSTALL.en.md) for details.
+
+## Example prompts
+
+```text
+Create a seven-card Xiaohongshu album about slowing down.
+Prepare the titles, caption, topics, and manual image order in English.
+```
+
+```text
+Package these images locally. Do not log in to or operate Xiaohongshu.
+```
+
+## Deterministic handoff builder
+
+Create a UTF-8 JSON spec and run:
+
+```bash
+python3 plugins/rednote-content-kit/skills/rednote-content-pack/scripts/build_handoff.py \
+  --spec /path/to/package-spec.json \
+  --output /path/to/dist/package-id
+```
+
+The builder emits `handoff.md`, `manifest.json`, and an ordered `images/` directory. Omit `language` for the default `zh-CN`, or set it to `en` for English. See the [English schema](plugins/rednote-content-kit/skills/rednote-content-pack/references/package-schema.en.md).
+
+## Privacy and security boundary
+
+- No Xiaohongshu/RedNote login.
+- No cookies, tokens, passwords, verification codes, or browser sessions.
+- No upload, draft saving, scheduling, publishing, comments, or messages.
+- No telemetry or runtime network requests.
+- No source-machine absolute paths in the handoff.
+- Rejects symlinks, path traversal, disguised images, oversized files, and non-empty output directories.
+- Users remain responsible for rights to images, fonts, quotations, and other materials.
+
+## Validation
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 tools/audit_release.py .
 ```
 
-The final release gate is intentionally expected to fail while the hold is active:
+## Contributing
 
-```bash
-python3 tools/audit_release.py . --release
-```
+Issues and pull requests are welcome. Use synthetic reproduction data and never attach real account data, credentials, unpublished images, private analytics, or conversations. See `CONTRIBUTING.md` and `SECURITY.md`.
 
-## Installation after release approval
+## Commercial use and support
 
-Once this repository is public and the release hold has been removed:
+The MIT License permits commercial use. Installation, custom templates, team training, private extensions, and ongoing support may be offered as separate paid services without changing the repository license.
 
-```bash
-codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
-```
+## Independent project notice
 
-Then restart the ChatGPT desktop app, open Plugins, choose the Rednote Content Kit marketplace, and install the plugin. See `docs/INSTALL.en.md` for manual installation.
-
-## Legal and brand notice
-
-This is an independent community project. It is not affiliated with, endorsed by, or sponsored by Xiaohongshu/RedNote. Platform names are used only to describe compatibility. Do not add platform logos, copied interface assets, private account data, or third-party content without permission.
+This is an independent community project and is not affiliated with, endorsed by, or sponsored by Xiaohongshu/RedNote. Platform names are used only to describe the intended workflow. Users are responsible for applicable law, platform rules, and content rights.
 
 ## License
 
-The project is prepared under the MIT License. It permits use, modification, distribution, and commercial use when the copyright and license notices are preserved. See `LICENSE`.
-
-Selecting MIT does not clear the public-release hold. See `PATENT-AND-LICENSING.md` before making any public disclosure. This repository is not legal advice.
+[MIT License](LICENSE) © 2026 Rednote Content Kit Contributors
