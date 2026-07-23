@@ -12,7 +12,8 @@
 
 - Additional local templates and schema validation.
 - More synthetic examples and cross-platform tests.
-- Optional local accessibility and image-quality checks.
+- Optional perceptual duplicate detection and deeper image-quality checks.
+- Cross-platform browserless PNG rendering without weakening the local sandbox.
 - Translations that do not change the no-platform-automation boundary.
 
 Platform login, upload, draft, schedule, publish, comment, message, and evasion automation are permanently out of scope.

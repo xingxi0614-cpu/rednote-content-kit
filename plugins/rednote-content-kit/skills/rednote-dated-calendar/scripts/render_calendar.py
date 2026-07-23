@@ -137,10 +137,24 @@ def inspect_png(path: Path) -> None:
         raise CalendarError(f"unexpected PNG dimensions: {path}")
 
 
-def render(spec_path: Path, output_dir: Path, chrome_arg: Path | None, html_only: bool) -> dict:
+def render(
+    spec_path: Path,
+    output_dir: Path,
+    chrome_arg: Path | None,
+    html_only: bool,
+    require_complete_visuals: bool = False,
+    require_png: bool = False,
+) -> dict:
     spec = load_spec(spec_path)
     if not CSS_PATH.is_file():
         raise CalendarError(f"CSS missing: {CSS_PATH}")
+    photo = photo_path(spec)
+    if require_complete_visuals and photo is None:
+        raise CalendarError(
+            "complete visuals required: bind a generated or user-supplied photo_path first"
+        )
+    if require_png and html_only:
+        raise CalendarError("--require-png cannot be combined with --html-only")
     output_dir.mkdir(parents=True, exist_ok=True)
     stem = f'rednote-{spec["date"]}-{spec["slug"]}'
     html_path = output_dir / f"{stem}.html"
@@ -155,13 +169,23 @@ def render(spec_path: Path, output_dir: Path, chrome_arg: Path | None, html_only
                    f"--screenshot={png_path}", html_path.resolve().as_uri()]
         result = subprocess.run(command, capture_output=True, text=True, check=False)
         if result.returncode != 0 or not png_path.is_file():
-            raise CalendarError((result.stderr or result.stdout).strip() or "Chrome render failed")
+            raise CalendarError(
+                (result.stderr or result.stdout).strip()
+                or "Chrome render failed; the local sandbox may require explicit browser-process approval"
+            )
         inspect_png(png_path)
     elif not html_only:
+        if require_png:
+            raise CalendarError(
+                "PNG required but Chrome was not found; install Chrome or provide an approved renderer"
+            )
         warning = "Chrome was not found; HTML was created but PNG rendering was skipped."
     return {"ok": True, "date": spec["date"], "weekday_verified": True,
             "html_path": str(html_path.resolve()), "png_rendered": png_path.is_file(),
             "png_path": str(png_path.resolve()) if png_path.is_file() else None,
+            "photo_count": 1 if photo else 0,
+            "visual_mode": "photograph" if photo else "placeholder",
+            "strict_visuals": require_complete_visuals,
             "warning": warning}
 
 
@@ -171,9 +195,26 @@ def main() -> int:
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--chrome", type=Path)
     parser.add_argument("--html-only", action="store_true")
+    parser.add_argument(
+        "--require-complete-visuals",
+        action="store_true",
+        help="fail unless a generated or user-supplied photo_path is attached",
+    )
+    parser.add_argument(
+        "--require-png",
+        action="store_true",
+        help="fail unless the final 1242x1656 PNG is rendered",
+    )
     args = parser.parse_args()
     try:
-        result = render(args.spec.resolve(), args.output_dir.resolve(), args.chrome, args.html_only)
+        result = render(
+            args.spec.resolve(),
+            args.output_dir.resolve(),
+            args.chrome,
+            args.html_only,
+            args.require_complete_visuals,
+            args.require_png,
+        )
     except CalendarError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2

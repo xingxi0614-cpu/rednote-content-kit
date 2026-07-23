@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 
-一个面向 Codex 的开源内容工作流：在本地完成带日期的日历日签、无日期走心图集、文案整理、隐私校验和人工发布交付包。
+一个面向 Codex 的开源内容工作流：联动宿主提供的 imagegen/Imagen 能力，在本地完成带日期的日历日签、无日期走心图集、无字背景生成、文案整理、隐私校验和人工发布交付包。
 
 **它帮助你把内容准备好，但不会代替你登录、上传或发布。**
 
@@ -45,21 +45,39 @@
 
 - 制定内容简报：受众、场景、目标、依据和下一步动作。
 - 生成日签、单图笔记或无日期图集方案。
+- 当宿主提供 imagegen/Imagen 时生成无字摄影背景；没有该能力时输出明确的图片计划，不把占位图当成摄影成品。
 - 整理推荐标题、备选标题、正文、话题和评论引导。
 - 校验图片格式、图片顺序、话题数量、引用和文案一致性。
 - 把指定图片复制到独立交付目录，并生成相对路径和 SHA-256。
 - 输出 `handoff.md` 和 `manifest.json`，方便用户人工复制与上传。
 - 默认输出简体中文，明确要求时支持英文。
 
-## 两个核心创作 Skill
+## 三个核心创作 Skill
 
 ### `rednote-dated-calendar`
 
-把一个准确日期做成 3:4 相纸日历卡。流程会核对公历日期与星期，要求人工复核农历和节气，生成标题、文案、图片提示词、HTML，并可通过本机 Chrome 导出 `1242 × 1656` PNG。
+把一个准确日期做成 3:4 相纸日历卡。流程会核对公历日期与星期，要求人工复核农历和节气，生成标题、文案和图片提示词；成品请求会联动图片素材 Skill，并通过本机 Chrome 严格导出 `1242 × 1656` PNG。
 
 ### `rednote-heartfelt-album`
 
-把一个具体情绪或生活场景做成完整七页图集：`1 张封面 + 6 张内页`、三个标题方向、正文、话题、逐页图片提示词、引用来源审计，以及可选的本地 HTML/PNG 渲染。
+把一个具体情绪或生活场景做成完整七页图集：`1 张封面 + 6 张内页`、三个标题方向、正文、话题、逐页图片提示词、引用来源审计，以及七张独立背景图的严格本地 HTML/PNG 渲染。
+
+### `rednote-image-assets`
+
+负责完整视觉层：从日签或图集 JSON 生成机器可读图片计划，调用宿主已有的 imagegen/Imagen，检查无字、无水印、尺寸和重复素材，把图片安全绑定到新 spec，再交给日签或图集渲染器。插件不会索取或保存图片服务 API Key。
+
+## 完整视觉链路
+
+```text
+主题或日期
+  → 文案与图片提示词
+  → 宿主 imagegen/Imagen 生成无字背景
+  → 本地图片校验与 spec 绑定
+  → Chrome 确定性合成
+  → 1242×1656 PNG 与总预览
+```
+
+GitHub 仓库打包的是工作流、提示词、校验、绑定和渲染代码；图片模型、额度与服务条款由 Codex/ChatGPT 等宿主提供。没有宿主图片生成能力时，可使用自己的图片；如果两者都没有，Skill 会停在图片计划并明确报告未完成，不再把抽象占位图当成最终摄影效果。
 
 ## 两个辅助安全 Skill
 
@@ -83,7 +101,7 @@ codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
 
 ### 手动安装 Skill
 
-将 `plugins/rednote-content-kit/skills/` 中需要的 Skill 目录复制到：
+将 `plugins/rednote-content-kit/skills/` 中需要的 Skill 目录复制到；完整摄影成品需要同时安装 `rednote-image-assets`：
 
 ```text
 $HOME/.agents/skills/
@@ -96,13 +114,15 @@ $HOME/.agents/skills/
 安装后可以直接提出类似请求：
 
 ```text
-帮我做一张 2026-07-23 的大暑日历日签，核对星期、农历和节气，
-默认中文，生成本地图片和可复制文案，不操作小红书。
+帮我做一张 2026-07-23 的大暑日历日签，核对星期、农历和节气。
+默认中文，使用当前宿主提供的 imagegen/Imagen 生成无字背景，
+严格生成本地 1242×1656 PNG 和可复制文案，不操作小红书。
 ```
 
 ```text
 帮我做一组“慢一点也没关系”的小红书图集，默认中文，
-1 张封面加 6 张内页，整理好标题、正文、话题和人工上传顺序。
+1 张封面加 6 张内页，为每页生成独立无字背景，拒绝重复图片和占位图，
+严格输出 7 张 1242×1656 PNG、总预览、正文、话题和人工上传顺序。
 ```
 
 或者：
@@ -174,6 +194,7 @@ plugins/rednote-content-kit/
   .codex-plugin/plugin.json
   skills/rednote-dated-calendar/
   skills/rednote-heartfelt-album/
+  skills/rednote-image-assets/
   skills/rednote-content-pack/
   skills/rednote-manual-publish-guard/
 docs/

@@ -1,0 +1,4 @@
+interface:
+  display_name: "图片生成与素材绑定"
+  short_description: "调用宿主 imagegen/Imagen 生成无字背景，并校验绑定到日签或七页图集"
+  default_prompt: "Use $rednote-image-assets to generate or bind complete local visuals for a Chinese RedNote calendar or album spec, without operating the platform."

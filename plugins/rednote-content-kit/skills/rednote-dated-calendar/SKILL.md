@@ -21,18 +21,28 @@ Turn one exact date into a polished 3:4 photo-paper calendar card and a copy-rea
 6. If using a quotation, verify exact wording, author, work, and a reliable source. Otherwise remove the attribution and write original text.
 7. Create a clean 4:3 photo prompt with no text, watermark, logo, brand mark, or app interface.
 8. Save a JSON spec using `assets/calendar-spec-template.json`. Read `references/spec-schema.md`.
-9. Render locally when Chrome is available:
+9. When the user requests a finished image, read and follow the sibling `rednote-image-assets` Skill:
+   - use the host-provided `imagegen`/Imagen capability when available
+   - save the clean source photograph as `calendar.png`
+   - bind it to a new spec with `rednote-image-assets/scripts/image_assets.py`
+   - if image generation is unavailable, accept a user-supplied image or stop at the image plan; never call a placeholder a finished photograph
+10. Render locally. For a finished image, use strict completion:
 
 ```bash
-python3 scripts/render_calendar.py --spec /absolute/path/calendar.json --output-dir /absolute/path/output
+python3 scripts/render_calendar.py \
+  --spec /absolute/path/calendar.with-images.json \
+  --output-dir /absolute/path/output \
+  --require-complete-visuals \
+  --require-png
 ```
 
-10. Inspect the PNG at full size: 1242x1656, correct date metadata, no text overflow, clean image crop, and copy-image consistency.
-11. Prepare 80-220 Chinese characters of caption, one low-pressure question, and 5-8 unique topics.
+11. If Chrome is blocked by the local sandbox, request approval to run the local rendering process. Do not add `--no-sandbox`, bypass host security, or silently replace the photographic visual.
+12. Inspect the PNG at full size: 1242x1656, correct date metadata, no text overflow, clean image crop, and copy-image consistency.
+13. Prepare 80-220 Chinese characters of caption, one low-pressure question, and 5-8 unique topics.
 
 ## Output Contract
 
-Deliver the content brief, JSON spec, HTML card, optional 1242x1656 PNG, copy package, source audit when quotations are used, and a manual upload order. Never include credentials, browser profiles, account names, private analytics, or source-machine paths in a public package.
+Deliver the content brief, JSON spec, image plan, bound spec, HTML card, 1242x1656 PNG for finished-image requests, copy package, source audit when quotations are used, and a manual upload order. A copy-only request may stop before image generation. Never include credentials, browser profiles, account names, private analytics, or source-machine paths in a public package.
 
 ## Boundaries
 
@@ -43,4 +53,4 @@ Deliver the content brief, JSON spec, HTML card, optional 1242x1656 PNG, copy pa
 
 ## Final Response
 
-Report the exact date, validation status, output folder, whether a quotation was used and verified, and whether PNG rendering succeeded. State that nothing was uploaded or published.
+Report the exact date, validation status, image generator actually used, visual mode, output folder, whether a quotation was used and verified, and whether strict PNG rendering succeeded. State that nothing was uploaded or published.

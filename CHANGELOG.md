@@ -6,6 +6,9 @@
 - Added deterministic local HTML/PNG renderers, schemas, templates, and Chinese-first prompts for both modes.
 - Kept the existing handoff builder and manual publishing guard as supporting safety tools.
 - Prepared dated-calendar and photo-paper album examples for a separate rights-approved public update.
+- Added `rednote-image-assets`, a host-imagegen/Imagen integration Skill with deterministic image plans, local asset validation, duplicate detection, and safe spec binding.
+- Added strict visual and PNG completion flags so placeholders cannot be reported as finished photographic cards.
+- Documented the difference between the bundled workflow and the host-provided image model, with no API-key or runtime network dependency.
 
 ## 0.1.0 — 2026-07-22
 

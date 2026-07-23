@@ -14,7 +14,9 @@ Use UTF-8 JSON. Required fields:
 - `source_type`: `original` or `sourced`.
 - `source_label`: use `原创` for original text; otherwise use a traceable author and work.
 - `photo_prompt`: clean 4:3 photograph prompt without embedded text.
-- `photo_path`: optional absolute PNG/JPEG/WebP path. When omitted, the renderer uses a neutral placeholder.
+- `photo_path`: optional absolute PNG/JPEG/WebP path for copy-only drafts. A finished-image request must bind a generated or user-supplied image and render with `--require-complete-visuals`.
 - `photo_position`: optional CSS background position, default `center`.
 
 The renderer verifies the Gregorian date and Chinese weekday. Lunar dates and exact-day term labels still require human verification because calendar conventions and data sources can differ.
+
+Use the sibling `rednote-image-assets` Skill to create `calendar.png`, validate it, and write a bound spec. `--require-png` makes the renderer fail when Chrome cannot create the final PNG, so an incomplete environment cannot be reported as a finished card.

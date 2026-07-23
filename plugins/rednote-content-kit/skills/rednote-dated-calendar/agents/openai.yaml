@@ -1,4 +1,4 @@
 interface:
   display_name: "日期日历日签"
-  short_description: "把一个准确日期做成可核验、可本地渲染的 3:4 相纸日历卡"
-  default_prompt: "Use $rednote-dated-calendar to create a verified local-only dated RedNote calendar card."
+  short_description: "核验日期，联动宿主图片生成，并制作完整的 3:4 相纸日历卡"
+  default_prompt: "Use $rednote-dated-calendar and $rednote-image-assets to create a verified Chinese local-only calendar card with a complete generated or user-supplied visual."

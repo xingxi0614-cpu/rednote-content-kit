@@ -219,6 +219,9 @@ def screenshot(chrome: Path, html_path: Path, png_path: Path, width: int, height
     result = subprocess.run(command, capture_output=True, text=True, check=False)
     if result.returncode != 0 or not png_path.is_file():
         detail = (result.stderr or result.stdout).strip()
+        detail = detail or (
+            "the local sandbox may require explicit browser-process approval"
+        )
         raise AlbumError(f"Chrome render failed for {html_path.name}: {detail}")
     inspect_png(png_path, width, height)
 
@@ -238,10 +241,30 @@ img{{width:100%;height:100%;object-fit:contain;display:block}} figcaption{{posit
 </style></head><body><header><h1>{html.escape(spec['theme'])}</h1><p>{html.escape(spec['series'])} · 1 封面 + 6 内页</p></header><main>{figures}</main></body></html>"""
 
 
-def render(spec_path: Path, output_dir: Path, chrome_arg: Path | None, html_only: bool) -> dict:
+def render(
+    spec_path: Path,
+    output_dir: Path,
+    chrome_arg: Path | None,
+    html_only: bool,
+    require_complete_visuals: bool = False,
+    require_png: bool = False,
+) -> dict:
     spec = load_spec(spec_path)
     if not CSS_PATH.is_file():
         raise AlbumError(f"CSS asset missing: {CSS_PATH}")
+    photos = [optional_photo(spec["cover"], "cover")] + [
+        optional_photo(slide, f"slide {index}")
+        for index, slide in enumerate(spec["slides"], start=1)
+    ]
+    attached_photos = [path for path in photos if path is not None]
+    if require_complete_visuals and len(attached_photos) != 7:
+        raise AlbumError(
+            f"complete visuals required: expected 7 photo_path values, found {len(attached_photos)}"
+        )
+    if require_complete_visuals and len(set(attached_photos)) != 7:
+        raise AlbumError("complete visuals require seven distinct photo_path values")
+    if require_png and html_only:
+        raise AlbumError("--require-png cannot be combined with --html-only")
     css = CSS_PATH.read_text(encoding="utf-8")
     output_dir.mkdir(parents=True, exist_ok=True)
     slug = spec["slug"]
@@ -270,6 +293,10 @@ def render(spec_path: Path, output_dir: Path, chrome_arg: Path | None, html_only
         screenshot(chrome, preview_html.resolve(), preview_path, 1440, 980)
         preview_path = preview_path.resolve()
     elif not html_only:
+        if require_png:
+            raise AlbumError(
+                "PNG required but Chrome was not found; install Chrome or provide an approved renderer"
+            )
         warning = "Chrome was not found; HTML cards were created but PNG rendering was skipped."
 
     return {
@@ -280,6 +307,9 @@ def render(spec_path: Path, output_dir: Path, chrome_arg: Path | None, html_only
         "png_rendered": bool(image_paths),
         "image_paths": [str(path) for path in image_paths],
         "preview_path": str(preview_path) if preview_path else None,
+        "photo_count": len(attached_photos),
+        "visual_mode": "photographs" if len(attached_photos) == 7 else "placeholder-or-partial",
+        "strict_visuals": require_complete_visuals,
         "warning": warning,
     }
 
@@ -290,6 +320,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--chrome", type=Path)
     parser.add_argument("--html-only", action="store_true")
+    parser.add_argument(
+        "--require-complete-visuals",
+        action="store_true",
+        help="fail unless all seven generated or user-supplied photo_path values are attached",
+    )
+    parser.add_argument(
+        "--require-png",
+        action="store_true",
+        help="fail unless all final PNG cards and the contact sheet are rendered",
+    )
     return parser
 
 
@@ -297,7 +337,14 @@ def main() -> int:
     args = build_parser().parse_args()
     output_dir = (args.output_dir or args.spec.parent).expanduser().resolve()
     try:
-        result = render(args.spec.expanduser().resolve(), output_dir, args.chrome, args.html_only)
+        result = render(
+            args.spec.expanduser().resolve(),
+            output_dir,
+            args.chrome,
+            args.html_only,
+            args.require_complete_visuals,
+            args.require_png,
+        )
     except AlbumError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2

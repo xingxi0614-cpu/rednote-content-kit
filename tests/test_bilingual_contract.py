@@ -35,6 +35,7 @@ class BilingualContractTests(unittest.TestCase):
         for skill in (
             "rednote-dated-calendar",
             "rednote-heartfelt-album",
+            "rednote-image-assets",
             "rednote-content-pack",
             "rednote-manual-publish-guard",
         ):
