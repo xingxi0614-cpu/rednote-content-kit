@@ -1,0 +1,41 @@
+:root {
+  color-scheme: light;
+  --paper: #f4efe5;
+  --ink: #27231f;
+  --accent: #9b3f35;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "PingFang SC", Arial, sans-serif;
+}
+
+.card {
+  width: 1242px;
+  height: 1656px;
+  padding: 72px;
+  overflow: hidden;
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 28px;
+}
+
+.headline {
+  margin: 64px 0 20px;
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-size: 72px;
+  line-height: 1.18;
+}
+
+.source {
+  color: var(--accent);
+  font-size: 28px;
+}

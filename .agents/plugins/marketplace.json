@@ -1,0 +1,20 @@
+{
+  "name": "rednote-content-kit",
+  "interface": {
+    "displayName": "Rednote Content Kit"
+  },
+  "plugins": [
+    {
+      "name": "rednote-content-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rednote-content-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

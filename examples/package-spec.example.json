@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "package_id": "quiet-weekend",
+  "title_options": [
+    "把周末还给自己",
+    "今天不用赶路",
+    "慢一点也没关系"
+  ],
+  "recommended_title": "把周末还给自己",
+  "caption": "给忙了一周的自己留一点空白。去散步，去晒太阳，或者什么都不做。休息不是浪费时间，而是在把生活重新放回自己的手里。",
+  "topics": ["周末生活", "治愈文案", "松弛感", "生活记录", "自我照顾"],
+  "comment_starter": "这个周末，你最想把哪一小时留给自己？",
+  "collection_suggestion": "走心文案",
+  "images": [
+    {"path": "images/01-cover.png", "alt": "安静的周末封面"},
+    {"path": "images/02.png", "alt": "自然光下的生活场景"}
+  ]
+}

@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a privacy-preserving local feature.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed local-only solution
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Safety boundary
+      options:
+        - label: This request does not require platform login, upload, draft, scheduling, publishing, comments, messages, credentials, or telemetry.
+          required: true

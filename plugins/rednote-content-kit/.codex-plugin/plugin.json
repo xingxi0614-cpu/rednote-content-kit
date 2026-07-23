@@ -1,0 +1,23 @@
+{
+  "name": "rednote-content-kit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Create privacy-safe, local-only RedNote image and copy handoff packages without platform automation.",
+  "author": {
+    "name": "Rednote Content Kit Contributors"
+  },
+  "keywords": ["rednote", "xiaohongshu", "content", "privacy", "local-only"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Rednote Content Kit",
+    "shortDescription": "Build local image-and-copy packs without platform access.",
+    "longDescription": "Plan, validate, and package RedNote content locally. The plugin never logs in, uploads, saves drafts, publishes, or handles platform credentials.",
+    "developerName": "Rednote Content Kit Contributors",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Create a local-only RedNote image and copy handoff package.",
+      "Turn this publishing request into a safe manual-upload checklist."
+    ]
+  }
+}
