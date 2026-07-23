@@ -1,41 +1,49 @@
-# Rednote Content Kit
+# 小红书本地内容工具包
 
-> Pre-release security candidate. **Do not publish this repository until `RELEASE-HOLD.md` is cleared.** The project license has been selected, but patent, ownership, privacy, and publisher checks remain mandatory.
+[简体中文（默认）](README.md) | [English](README.en.md)
 
-Rednote Content Kit is a privacy-first Codex plugin for preparing Xiaohongshu/RedNote image-and-copy packages locally. It deliberately excludes browser automation, account login, upload, draft saving, scheduling, publishing, comment replies, direct messages, and credential handling.
+> 当前为发布前安全候选版。**在 `RELEASE-HOLD.md` 的全部门禁解除前，请勿将仓库改为公开。** MIT 许可证已经确定，但专利、权属、隐私和公开身份仍需最终确认。
 
-## Example output
+这是一个隐私优先、纯本地运行的 Codex Plugin，用来整理小红书 / RedNote 图片与文案交付包。它不会进行浏览器自动化，不会登录账号，也不会上传、存草稿、定时、发布、回复评论、发送私信或处理平台凭证。
 
-The following original sample demonstrates a local `1 cover + 6 inner cards` workflow. It contains generated scenery and original editorial copy. It is included only to show the visual result; it was not uploaded to or published on any platform.
+## 默认语言
 
-![Freedom album overview](docs/assets/examples/freedom-album-overview.png)
+- 默认使用简体中文生成内容、说明和人工交付清单。
+- 用户明确要求英文时，切换为英文输出。
+- 中文与英文使用相同的隐私边界、校验规则和纯本地工作流。
+
+## 效果展示
+
+下面是原创的 `1 张封面 + 6 张内页` 本地示例。画面为生成式自然场景，文字为原创编辑文案，仅用于展示生成效果；这些内容没有上传或发布到任何平台。
+
+![自由感图集总览](docs/assets/examples/freedom-album-overview.png)
 
 <p align="center">
-  <img src="docs/assets/examples/freedom-album-cover.png" alt="Freedom album cover" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="Freedom album first inner card" width="31%">
-  <img src="docs/assets/examples/freedom-album-slide-06.png" alt="Freedom album final inner card" width="31%">
+  <img src="docs/assets/examples/freedom-album-cover.png" alt="自由感图集封面" width="31%">
+  <img src="docs/assets/examples/freedom-album-slide-01.png" alt="自由感图集内页一" width="31%">
+  <img src="docs/assets/examples/freedom-album-slide-06.png" alt="自由感图集末页" width="31%">
 </p>
 
-See `docs/EXAMPLES.md` for provenance, safety review, dimensions, and checksums.
+图片来源、安全复核、尺寸和校验值见：[示例说明](docs/EXAMPLES.md)｜[English](docs/EXAMPLES.en.md)。
 
-## What it includes
+## 包含内容
 
-- `rednote-content-pack`: creates content briefs, image plans, copy, topics, and a deterministic manual handoff package.
-- `rednote-manual-publish-guard`: converts requests to upload or publish into a manual checklist without accessing the platform.
-- A local handoff builder that copies only explicitly listed images and emits relative paths.
-- Privacy, security, contribution, commercialization, patent, release, and incident-response documentation.
-- A platform-compliance checklist that keeps all account actions manual and requires current rule review.
-- CI checks for tests, credentials, personal paths, prohibited platform automation, caches, and unsafe release state.
+- `rednote-content-pack`：生成内容简报、图片规划、标题、正文、话题和确定性的人工交付包。
+- `rednote-manual-publish-guard`：把上传或发布请求转换为安全的人工操作清单，不访问平台。
+- 本地交付构建器：只复制清单中明确列出的图片，输出相对路径。
+- 隐私、安全、贡献、商业化、专利、许可证、发布和事件响应说明。
+- 平台合规清单：所有账号操作都由用户本人手工完成。
+- CI：检查测试、凭证、个人路径、平台自动化、缓存和发布门禁。
 
-## Safety properties
+## 安全特性
 
-- No Xiaohongshu/RedNote API, browser driver, cookie, token, password, or login support.
-- No telemetry or outbound network calls.
-- No bundled user images, analytics, account names, conversation history, or machine-specific paths.
-- Generated handoff manifests contain relative copied paths, not the source machine's absolute paths.
-- The source is prepared under the MIT License; public release remains blocked until the patent and remaining release decisions are recorded.
+- 不包含小红书 / RedNote API、浏览器驱动、Cookie、Token、密码或登录能力。
+- 不包含遥测和外部网络请求。
+- 不打包用户图片、账号数据、分析数据、对话历史或本机绝对路径。
+- 交付清单只记录复制后的相对路径，不暴露源电脑目录。
+- 代码使用 MIT License；公开发布仍受独立安全门禁约束。
 
-## Repository layout
+## 项目结构
 
 ```text
 .agents/plugins/marketplace.json
@@ -50,35 +58,35 @@ tests/
 tools/
 ```
 
-## Local validation
+## 本地验证
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 tools/audit_release.py .
 ```
 
-The final release gate is intentionally expected to fail while the hold is active:
+发布门禁仍生效时，下面的最终检查应当失败：
 
 ```bash
 python3 tools/audit_release.py . --release
 ```
 
-## Installation after release approval
+## 公开发布后的安装方式
 
-Once this repository is public and the release hold has been removed:
+仓库公开且发布门禁解除后运行：
 
 ```bash
 codex plugin marketplace add xingxi0614-cpu/rednote-content-kit
 ```
 
-Then restart the ChatGPT desktop app, open Plugins, choose the Rednote Content Kit marketplace, and install the plugin. See `docs/INSTALL.md` for manual installation.
+然后重启 ChatGPT 桌面应用，在 Plugins 中选择该 Marketplace 并安装本插件。详细步骤见：[安装说明](docs/INSTALL.md)｜[English](docs/INSTALL.en.md)。
 
-## Legal and brand notice
+## 法律与品牌声明
 
-This is an independent community project. It is not affiliated with, endorsed by, or sponsored by Xiaohongshu/RedNote. Platform names are used only to describe compatibility. Do not add platform logos, copied interface assets, private account data, or third-party content without permission.
+这是独立的社区项目，与小红书 / RedNote 没有隶属、授权或赞助关系。平台名称仅用于描述兼容场景。未经许可，请勿加入平台 Logo、界面素材、私人账号数据或第三方内容。
 
-## License
+## 许可证
 
-The project is prepared under the MIT License. It permits use, modification, distribution, and commercial use when the copyright and license notices are preserved. See `LICENSE`.
+项目采用 MIT License。保留版权和许可证声明的前提下，可以使用、修改、分发和商业使用。详见 `LICENSE`。
 
-Selecting MIT does not clear the public-release hold. See `PATENT-AND-LICENSING.md` before making any public disclosure. This repository is not legal advice.
+选择 MIT 不代表公开发布门禁已经解除。公开披露前请阅读 `PATENT-AND-LICENSING.md`。本项目文档不构成法律意见。

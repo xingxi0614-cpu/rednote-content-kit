@@ -2,22 +2,22 @@
   "name": "rednote-content-kit",
   "version": "0.1.0",
   "license": "MIT",
-  "description": "Create privacy-safe, local-only RedNote image and copy handoff packages without platform automation.",
+  "description": "默认使用中文生成隐私安全、纯本地的小红书图片与文案交付包，同时支持英文。",
   "author": {
     "name": "Rednote Content Kit Contributors"
   },
-  "keywords": ["rednote", "xiaohongshu", "content", "privacy", "local-only"],
+  "keywords": ["小红书", "中文", "rednote", "xiaohongshu", "content", "privacy", "local-only"],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Rednote Content Kit",
-    "shortDescription": "Build local image-and-copy packs without platform access.",
-    "longDescription": "Plan, validate, and package RedNote content locally. The plugin never logs in, uploads, saves drafts, publishes, or handles platform credentials.",
+    "displayName": "小红书本地内容工具包",
+    "shortDescription": "默认中文，生成本地图片、文案和人工交付包。",
+    "longDescription": "默认使用简体中文在本地规划、校验和打包小红书内容，也支持按用户要求输出英文。插件不会登录、上传、存草稿、发布或处理平台凭证。",
     "developerName": "Rednote Content Kit Contributors",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
     "defaultPrompt": [
-      "Create a local-only RedNote image and copy handoff package.",
-      "Turn this publishing request into a safe manual-upload checklist."
+      "生成一份默认中文、纯本地的小红书图片与文案交付包。",
+      "把这个发布请求转换为安全的中文人工上传清单；用户要求英文时再切换。"
     ]
   }
 }

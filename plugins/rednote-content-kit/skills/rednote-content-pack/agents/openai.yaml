@@ -1,4 +1,4 @@
 interface:
   display_name: "RedNote 本地内容包"
   short_description: "生成图片、文案和手工上传清单，不访问平台"
-  default_prompt: "Use $rednote-content-pack to prepare a privacy-safe local image-and-copy handoff package for manual upload."
+  default_prompt: "使用 $rednote-content-pack 默认以中文整理隐私安全、纯本地的图片与文案交付包；用户明确要求时再输出英文。"

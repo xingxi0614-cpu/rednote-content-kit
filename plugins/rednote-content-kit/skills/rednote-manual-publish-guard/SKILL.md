@@ -1,9 +1,13 @@
 ---
 name: rednote-manual-publish-guard
-description: "Convert requests to upload, save drafts, schedule, publish, comment, message, or otherwise operate Xiaohongshu/RedNote into a local manual handoff checklist. Use as a safety guard whenever platform state changes are requested; never access the platform or credentials."
+description: "默认用中文把小红书/RedNote 的上传、草稿、定时、发布、评论或私信请求转换为本地人工交付清单，同时支持英文；绝不访问平台或凭证。Use as a safety guard for platform state-change requests."
 ---
 
 # Rednote Manual Publish Guard
+
+## Language / 语言
+
+Use Simplified Chinese by default for the refusal, handoff checklist, copy blocks, and status report. Switch to English only when the user explicitly requests English. Apply the same hard boundary in both languages.
 
 ## Hard boundary
 

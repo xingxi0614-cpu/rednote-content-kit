@@ -1,23 +1,25 @@
-# Example Output
+# 效果示例
 
-## Included sample
+[简体中文（默认）](EXAMPLES.md) | [English](EXAMPLES.en.md)
 
-`docs/assets/examples/` contains four selected files from the original album prototype **“不必每一步都有答案”**:
+## 已收录示例
 
-- `freedom-album-overview.png` — overview of one cover and six inner cards, 1440 × 980.
-- `freedom-album-cover.png` — selected 3:4 cover, 1242 × 1656.
-- `freedom-album-slide-01.png` — selected 3:4 inner card, 1242 × 1656.
-- `freedom-album-slide-06.png` — selected 3:4 inner card, 1242 × 1656.
+`docs/assets/examples/` 收录了原创图集 **《不必每一步都有答案》** 的 4 个精选文件：
 
-The scenery was produced through the local image-generation workflow. All displayed Chinese copy is original editorial text written for the prototype; no external quotation or author attribution is used.
+- `freedom-album-overview.png`：1 张封面与 6 张内页的总览，1440 × 980。
+- `freedom-album-cover.png`：精选 3:4 封面，1242 × 1656。
+- `freedom-album-slide-01.png`：精选 3:4 内页，1242 × 1656。
+- `freedom-album-slide-06.png`：精选 3:4 内页，1242 × 1656。
 
-## Safety and rights review
+自然场景由本地图片生成流程制作，画面中的中文均为本项目原创编辑文案，不使用外部引语或作者署名。
 
-- Explicitly approved by the project owner for inclusion as a repository demonstration.
-- No account name, analytics, contact details, credential, platform interface, screenshot, logo, watermark, or machine path is visible or embedded as searchable text.
-- No identifiable person appears in the selected four files.
-- The files are examples only and do not indicate that any content was uploaded, saved as a platform draft, or published.
-- The files are distributed with this repository under the MIT License.
+## 安全与权属复核
+
+- 项目所有者已明确同意将这组图片用于仓库效果展示。
+- 不包含账号名称、分析数据、联系方式、凭证、平台界面、截图、Logo、水印或可检索的本机路径。
+- 精选的 4 个文件中没有可识别人物。
+- 示例仅用于展示，不代表任何内容已经上传、保存为平台草稿或正式发布。
+- 文件随本仓库按 MIT License 分发。
 
 ## SHA-256
 

@@ -1,7 +1,7 @@
 {
   "name": "rednote-content-kit",
   "interface": {
-    "displayName": "Rednote Content Kit"
+    "displayName": "小红书本地内容工具包"
   },
   "plugins": [
     {

@@ -1,9 +1,13 @@
 ---
 name: rednote-content-pack
-description: "Create privacy-safe, local-only Xiaohongshu/RedNote image-and-copy handoff packages. Use for content briefs, dated cards, no-date albums, titles, captions, topic candidates, comment starters, image ordering, local validation, and manual upload checklists. Never access or operate the platform."
+description: "默认使用中文创建隐私安全、纯本地的小红书/RedNote 图片与文案交付包，同时支持英文。Use for content briefs, dated cards, no-date albums, titles, captions, topics, image ordering, local validation, and manual upload checklists. Never access the platform."
 ---
 
 # Rednote Content Pack
+
+## Language / 语言
+
+Use Simplified Chinese by default for briefs, copy, checklists, manifests, and user-facing explanations. Switch to English only when the user explicitly requests English. Preserve the same safety checks and local-only boundary in both languages.
 
 ## Boundary
 

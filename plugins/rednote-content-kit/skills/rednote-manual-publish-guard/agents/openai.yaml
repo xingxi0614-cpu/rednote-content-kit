@@ -1,4 +1,4 @@
 interface:
   display_name: "RedNote 手工发布保护"
   short_description: "拦截平台操作并转换为本地手工清单"
-  default_prompt: "Use $rednote-manual-publish-guard to convert this platform action into a safe local manual-upload checklist."
+  default_prompt: "使用 $rednote-manual-publish-guard 默认以中文把平台操作请求转换为安全的本地人工清单；用户明确要求时再输出英文。"
