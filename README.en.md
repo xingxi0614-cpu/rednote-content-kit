@@ -6,6 +6,10 @@
 
 Rednote Content Kit is a privacy-first Codex plugin for preparing Xiaohongshu/RedNote image-and-copy packages locally. It deliberately excludes browser automation, account login, upload, draft saving, scheduling, publishing, comment replies, direct messages, and credential handling.
 
+## Language
+
+Simplified Chinese is the default for Skill responses and generated handoff files. Set `"language": "en"` in the package spec, or explicitly request English, to generate an English handoff with the same safety boundary.
+
 ## Example output
 
 The following original sample demonstrates a local `1 cover + 6 inner cards` workflow. It contains generated scenery and original editorial copy. It is included only to show the visual result; it was not uploaded to or published on any platform.

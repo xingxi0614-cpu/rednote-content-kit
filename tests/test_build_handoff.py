@@ -19,6 +19,7 @@ class BuildHandoffTests(unittest.TestCase):
         (root / "images/cover.png").write_bytes(b"\x89PNG\r\n\x1a\nsynthetic-test-data")
         payload = {
             "schema_version": 1,
+            "language": "zh-CN",
             "package_id": "test-package",
             "title_options": ["测试标题", "备选标题"],
             "recommended_title": "测试标题",
@@ -43,8 +44,42 @@ class BuildHandoffTests(unittest.TestCase):
             self.assertNotIn(str(root), manifest_text)
             self.assertNotIn(str(root), handoff_text)
             manifest = json.loads(manifest_text)
+            self.assertEqual(manifest["language"], "zh-CN")
             self.assertEqual(manifest["images"][0]["path"], "images/01.png")
+            self.assertIn("## 推荐标题", handoff_text)
             self.assertEqual(result["images"], 1)
+
+    def test_build_supports_english_handoff(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            spec_path = self.write_spec(root)
+            payload = json.loads(spec_path.read_text(encoding="utf-8"))
+            payload["language"] = "en"
+            payload["title_options"] = ["Test title", "Alternative title"]
+            payload["recommended_title"] = "Test title"
+            payload["caption"] = "Synthetic test caption."
+            payload["topics"] = ["test", "local handoff"]
+            payload["comment_starter"] = "Test question?"
+            payload["collection_suggestion"] = "Test collection"
+            spec_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            result = MODULE.build(spec_path, root / "dist/package")
+            manifest = json.loads(Path(result["manifest"]).read_text(encoding="utf-8"))
+            handoff = Path(result["handoff"]).read_text(encoding="utf-8")
+            self.assertEqual(manifest["language"], "en")
+            self.assertIn("## Recommended Title", handoff)
+            self.assertIn("## Manual Checklist", handoff)
+            self.assertNotIn("## 推荐标题", handoff)
+
+    def test_rejects_unsupported_language(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            spec_path = self.write_spec(root)
+            payload = json.loads(spec_path.read_text(encoding="utf-8"))
+            payload["language"] = "fr"
+            spec_path.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaises(MODULE.HandoffError):
+                MODULE.build(spec_path, root / "dist/package")
 
     def test_rejects_absolute_image_path(self):
         with tempfile.TemporaryDirectory() as temp:

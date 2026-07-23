@@ -15,6 +15,7 @@ from pathlib import Path
 SUPPORTED_IMAGES = {".png", ".jpg", ".jpeg", ".webp"}
 MAX_IMAGE_BYTES = 32 * 1024 * 1024
 PACKAGE_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+SUPPORTED_LANGUAGES = {"zh-CN", "en"}
 
 
 class HandoffError(RuntimeError):
@@ -77,6 +78,10 @@ def load_spec(path: Path) -> dict:
 
 
 def validate_spec(spec: dict, spec_dir: Path) -> dict:
+    language = clean_line(spec.get("language") or "zh-CN", "language")
+    if language not in SUPPORTED_LANGUAGES:
+        raise HandoffError("language must be zh-CN or en")
+
     package_id = clean_line(spec.get("package_id"), "package_id")
     if not PACKAGE_ID.fullmatch(package_id):
         raise HandoffError("package_id must use lowercase letters, digits, and hyphens")
@@ -130,6 +135,7 @@ def validate_spec(spec: dict, spec_dir: Path) -> dict:
 
     return {
         "schema_version": 1,
+        "language": language,
         "package_id": package_id,
         "title_options": titles,
         "recommended_title": recommended,
@@ -171,10 +177,51 @@ def build(spec_path: Path, output_dir: Path) -> dict:
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    if spec["language"] == "en":
+        labels = {
+            "title": "Manual Publishing Handoff",
+            "images": "Image Order",
+            "recommended": "Recommended Title",
+            "alternatives": "Alternative Titles",
+            "caption": "Caption",
+            "topics": "Topic Candidates",
+            "comment": "Comment Starter",
+            "collection": "Collection Suggestion",
+            "checklist": "Manual Checklist",
+            "steps": [
+                "The user selects the local files in the listed image order.",
+                "Copy the recommended title.",
+                "Copy the caption.",
+                "The user reviews and selects relevant topics, collection, visibility, and publishing time.",
+                "Before publishing, check the images, copy, rights, privacy, and current platform rules again.",
+            ],
+            "boundary": "> This tool did not log in, upload, save a draft, schedule, or publish any content.",
+        }
+    else:
+        labels = {
+            "title": "手工发布交付包",
+            "images": "图片顺序",
+            "recommended": "推荐标题",
+            "alternatives": "备选标题",
+            "caption": "正文",
+            "topics": "话题候选",
+            "comment": "评论引导",
+            "collection": "合集建议",
+            "checklist": "手工操作清单",
+            "steps": [
+                "按图片顺序由用户本人选择本地文件。",
+                "复制推荐标题。",
+                "复制正文。",
+                "由用户本人核对并选择相关话题、合集、可见范围和发布时间。",
+                "发布前再次检查图片、文字、版权、隐私和平台规则。",
+            ],
+            "boundary": "> 本工具未登录、上传、存草稿、定时或发布任何内容。",
+        }
+
     lines = [
-        f"# {spec['package_id']} 手工发布交付包",
+        f"# {spec['package_id']} {labels['title']}",
         "",
-        "## 图片顺序",
+        f"## {labels['images']}",
         "",
     ]
     for image in manifest_images:
@@ -182,37 +229,33 @@ def build(spec_path: Path, output_dir: Path) -> dict:
         lines.append(f"{image['order']}. `{image['path']}`{suffix}")
     lines.extend([
         "",
-        "## 推荐标题",
+        f"## {labels['recommended']}",
         "",
         spec["recommended_title"],
         "",
-        "## 备选标题",
+        f"## {labels['alternatives']}",
         "",
         *[f"- {title}" for title in spec["title_options"] if title != spec["recommended_title"]],
         "",
-        "## 正文",
+        f"## {labels['caption']}",
         "",
         spec["caption"],
         "",
-        "## 话题候选",
+        f"## {labels['topics']}",
         "",
         " ".join(f"#{topic}" for topic in spec["topics"]),
     ])
     if spec["comment_starter"]:
-        lines.extend(["", "## 评论引导", "", spec["comment_starter"]])
+        lines.extend(["", f"## {labels['comment']}", "", spec["comment_starter"]])
     if spec["collection_suggestion"]:
-        lines.extend(["", "## 合集建议", "", spec["collection_suggestion"]])
+        lines.extend(["", f"## {labels['collection']}", "", spec["collection_suggestion"]])
     lines.extend([
         "",
-        "## 手工操作清单",
+        f"## {labels['checklist']}",
         "",
-        "1. 按图片顺序由用户本人选择本地文件。",
-        "2. 复制推荐标题。",
-        "3. 复制正文。",
-        "4. 由用户本人核对并选择相关话题、合集、可见范围和发布时间。",
-        "5. 发布前再次检查图片、文字、版权、隐私和平台规则。",
+        *[f"{index}. {step}" for index, step in enumerate(labels["steps"], start=1)],
         "",
-        "> 本工具未登录、上传、存草稿、定时或发布任何内容。",
+        labels["boundary"],
         "",
     ])
     handoff_path = output_dir / "handoff.md"

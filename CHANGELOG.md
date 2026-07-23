@@ -10,3 +10,4 @@
 - Added four reviewed original example images and documented their provenance, dimensions, and checksums.
 - Created the private GitHub candidate, replaced repository placeholders, and documented the verified GitHub security-feature availability.
 - Added Chinese-first bilingual documentation and made Simplified Chinese the default Skill and Plugin output language.
+- Added deterministic Chinese/English `handoff.md` rendering with `zh-CN` as the schema default.

@@ -22,7 +22,7 @@ Do not include private account names, analytics, conversations, personal identif
 3. Create fresh images with an available image-generation capability or use images explicitly supplied by the user. Require no embedded text, watermark, logo, or sensitive interface by default.
 4. Write three title candidates, one recommended title, a concise caption, five to ten relevant topic candidates, and one comment starter.
 5. Verify that quotes, claims, dates, and sources are accurate. Avoid long copyrighted passages and never invent attribution.
-6. Store selected images under one local project root. Create a JSON spec based on `references/package-schema.md` using relative image paths only.
+6. Store selected images under one local project root. Create a JSON spec based on `references/package-schema.md` (English: `references/package-schema.en.md`) using relative image paths only. Omit `language` or use `zh-CN` for the default Chinese handoff; use `en` only when the user requests English.
 7. Run `scripts/build_handoff.py` from this skill directory or by its resolved absolute location:
 
    ```bash
