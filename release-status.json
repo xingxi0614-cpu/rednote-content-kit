@@ -8,5 +8,6 @@
   "repository": "approved",
   "visibility": "public",
   "visibility_change_approved": true,
-  "approval_date": "2026-07-22"
+  "approval_date": "2026-07-22",
+  "release_tag": "v0.1.0"
 }

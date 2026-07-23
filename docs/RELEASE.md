@@ -26,7 +26,7 @@ This file records the release controls for `xingxi0614-cpu/rednote-content-kit`.
 - [x] Enable GitHub secret scanning and push protection.
 - [x] Enable private vulnerability reporting.
 - [x] Confirm Dependabot vulnerability alerts and automated security fixes.
-- [ ] Confirm GitHub Actions succeeds on the public release commit.
-- [ ] Create and verify the `v0.1.0` tag from the approved commit.
+- [x] Confirm GitHub Actions succeeds on the public release commit.
+- [x] Create and verify the `v0.1.0` tag from the approved commit.
 
 Never bypass a GitHub security alert to finish a release. If a secret is ever exposed, revoke or rotate it first, then remediate the Git history and verify the result.
