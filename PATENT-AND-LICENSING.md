@@ -1,54 +1,24 @@
 # Patent and Licensing Decision
 
-This document is operational guidance, not legal advice.
+This document records the project decision and is not legal advice.
 
-## Recorded software-license decision
+## Software license
 
-The selected public software license is **MIT**. The complete standard text is installed in `LICENSE`, and the Plugin manifest records the SPDX identifier `MIT`.
+The project uses the **MIT License**. The complete standard text is in `LICENSE`, and the Plugin manifest records the SPDX identifier `MIT`.
 
-This decision favors broad adoption and service-led commercialization. It does not authorize public disclosure: the patent-first rule and every remaining item in `RELEASE-HOLD.md` still apply.
+MIT permits use, modification, distribution, private use, and commercial use when the required copyright and license notices are preserved. It does not provide exclusivity: recipients may also commercialize the MIT-licensed project.
 
-## Patent-first rule
+## Patent decision for this release
 
-Public disclosure can become prior art and may destroy patent novelty in jurisdictions without a broad grace period. Do not publish code, detailed workflows, demos, papers, screenshots, or public downloads until a qualified patent professional has reviewed whether there is a patentable technical invention and whether filing should happen first.
+On 2026-07-22, before public visibility was enabled, the project owner explicitly decided not to seek patent protection for the content included in this repository and accepted the possible effect of public disclosure on patent rights.
 
-WIPO recommends filing before public disclosure because grace periods vary by jurisdiction. China's Patent Law defines prior art broadly and provides only specified exceptions; it also excludes rules and methods for intellectual activities from patent protection. A content workflow or prompt may therefore rely more on copyright, trade secret, trademark, or service execution than on patents, while a genuinely technical implementation may require a different analysis.
+That decision applies to the currently published repository content. A genuinely new technical invention created later should receive a separate patent and disclosure review before it is added to a public branch.
 
-Owning a patent and licensing software are separate questions. An open-source license normally does not transfer patent ownership, but some licenses expressly grant users a patent license, and other licenses may carry legal uncertainty about implied rights. The exact effect must be reviewed for the jurisdictions and claims involved.
+## Commercialization
 
-## Considered public-license paths
+The selected model is broad adoption plus service-led revenue. Examples include paid installation, custom workflows and templates, private extensions, training, audits, maintenance, and support. Already released MIT versions must not be represented as exclusive or royalty-bearing software.
 
-### MIT — maximum adoption
-
-- Simple and permissive.
-- Allows anyone, including competitors, to use, modify, redistribute, and sell the software.
-- Good for reach, consulting, training, templates, sponsorship, and reputation-led monetization.
-- Weak leverage for selling proprietary exceptions because recipients already receive broad rights.
-- Contains no express patent license text, but that does not guarantee that every patent issue is reserved in every jurisdiction.
-
-### AGPL-3.0-only plus a commercial license — stronger dual-license leverage
-
-- Keeps distributed and network-served modified versions under strong source-sharing obligations.
-- The copyright holder may also sell a separate commercial license for proprietary use.
-- Requires control of contribution copyright or contributor agreements that permit relicensing.
-- Contains patent provisions and should not be chosen before professional patent review.
-
-### Source-available/non-commercial — maximum commercial control
-
-- Can reserve commercial use for paid customers.
-- Must not be described as “open source” unless the license is OSI-approved.
-- May reduce adoption and community contributions.
-
-## Recorded implementation decision
-
-1. Keep this candidate private.
-2. Obtain a patentability and prior-art assessment before public disclosure.
-3. MIT has been selected because adoption and service-led revenue are the current priorities.
-4. Do not promise exclusive use or code royalties: every recipient receives MIT's commercial-use rights.
-5. If the business later depends on proprietary licensing, apply that model only to separately owned future components after legal review; already released MIT versions remain available under their granted terms.
-6. Run and document the release gate before any public disclosure.
-
-## Primary references
+## References
 
 - WIPO, “How to Protect Inventions through Patents”: https://www.wipo.int/en/web/patents/protection
 - China National Intellectual Property Administration, Patent Law Articles 22-25: https://english.cnipa.gov.cn/art/2022/10/13/art_3068_179273.html

@@ -1,33 +1,32 @@
-# Release Procedure
+# Public Release Procedure
 
-1. Complete the patent decision in `PATENT-AND-LICENSING.md`; MIT is already selected and must not be changed without a documented decision.
-2. Verify ownership and redistribution rights for every tracked file.
-3. Verify that `LICENSE` is the unmodified MIT text with the intended generic copyright holder.
-4. Verify that `.codex-plugin/plugin.json` contains the SPDX identifier `MIT`.
-5. Replace installation placeholders only after the final GitHub owner and repository name are known.
-6. Remove `RELEASE-HOLD.md` only after every checkbox is satisfied.
-7. Run:
+This file records the release controls for `xingxi0614-cpu/rednote-content-kit`. It contains no credentials or private identity data.
 
-   ```bash
-   python3 -m unittest discover -s tests -v
-   python3 tools/audit_release.py . --release
-   ```
+## Recorded decisions
 
-8. Review the complete staged file list and diff.
-9. Before the first commit, configure a public-safe Git author identity and a GitHub-provided `noreply` email. Existing commit metadata cannot be made private merely by changing the setting later.
-10. Create a private GitHub repository first; enable secret scanning, push protection, and private vulnerability reporting.
-11. Never bypass a secret-scanning or push-protection alert merely to finish the release.
-12. Show the exact repository, visibility, README, license, commit identity, and release contents to the owner.
-13. Obtain current explicit approval before changing visibility to public or publishing a release.
-14. Tag the verified commit as `v0.1.0`; attach only artifacts built from that commit.
+- License: MIT.
+- Patent: on 2026-07-22, the owner decided not to seek patent protection for the currently published project content and accepted the effect of public disclosure.
+- Rights: the owner confirmed the right to publish the tracked code, documentation, original copy, and four example images.
+- Publisher and destination: `xingxi0614-cpu/rednote-content-kit` approved for public visibility.
+- Commit identity: GitHub-provided `noreply` email.
 
-## Current private-candidate hosting status
+## Pre-visibility checks
 
-- Private repository: `xingxi0614-cpu/rednote-content-kit`.
-- Dependabot vulnerability alerts: enabled.
-- Dependabot automated security fixes: enabled.
-- GitHub secret scanning and push protection: unavailable for this repository while private on the current account plan; the API returned HTTP 422. Recheck availability before any visibility change.
-- Private vulnerability reporting: unavailable for the current private repository; the API returned HTTP 404. Recheck after any future public-release approval.
-- Local release audit and final human diff review remain mandatory regardless of GitHub feature availability.
+- [x] MIT text and SPDX metadata agree.
+- [x] Personal paths, names, common secret patterns, private keys, symlinks, caches, archives, and platform automation are absent from the release tree.
+- [x] Four example images have reviewed dimensions, provenance notes, and SHA-256 values.
+- [x] Full Git history uses the approved GitHub `noreply` identity and passes the history pattern scan.
+- [x] Unit tests and `python3 tools/audit_release.py . --release` pass.
+- [x] The public README is complete in Chinese and English.
+- [x] The owner explicitly approved public visibility.
 
-Never rewrite history to hide a leaked secret. Revoke or rotate the secret first, then remove it from history and verify the remediation.
+## Post-visibility checks
+
+- [ ] Confirm anonymous repository, README, image, clone, and ZIP access.
+- [ ] Enable GitHub secret scanning and push protection when available.
+- [ ] Enable private vulnerability reporting when available.
+- [ ] Confirm Dependabot vulnerability alerts and automated security fixes.
+- [ ] Confirm GitHub Actions succeeds on the public release commit.
+- [ ] Create and verify the `v0.1.0` tag from the approved commit.
+
+Never bypass a GitHub security alert to finish a release. If a secret is ever exposed, revoke or rotate it first, then remediate the Git history and verify the result.

@@ -2,9 +2,9 @@
 
 ## Executive summary
 
-No critical or high-severity issue was found in the generated public candidate. Five unit tests, both Skill validators, the Plugin validator, the generic release audit, and an owner-specific personal-information scan passed. The runtime uses the Python standard library, performs no network request, and contains no platform login or automation code.
+No critical or high-severity issue was found in the public release tree. Eleven unit tests, the generic and final release audits, JSON/frontmatter checks, documentation-link checks, current-tree scans, and full-history pattern scans passed before the visibility change.
 
-“Absolute safety” cannot be guaranteed by pattern matching alone. Public release therefore remains blocked until patent, publisher identity, repository URL, GitHub secret scanning, and a final human review are complete. The MIT license selection is complete.
+The runtime uses the Python standard library, makes no network request, and has no platform login, upload, draft, scheduling, publishing, comment, message, or credential feature.
 
 ## Critical
 
@@ -16,38 +16,37 @@ None found.
 
 ## Medium
 
-### SEC-001 — Final public release still requires independent GitHub scanning and human review
+### SEC-001 — GitHub public security features require post-visibility verification
 
-Local pattern checks cannot recognize every possible secret or personal fact. The release procedure therefore requires a private repository first, GitHub secret scanning and push protection, private vulnerability reporting, a complete diff review, and current approval before public visibility (`docs/RELEASE.md`, lines 16-22).
+Secret scanning, push protection, and private vulnerability reporting were not available while the repository was private. The release procedure requires enabling each available feature immediately after public visibility and recording the actual result.
 
-Status: open release requirement; correctly blocked by `RELEASE-HOLD.md`.
+Status: pending post-visibility verification; does not bypass the passing local release audit.
 
-### SEC-002 — Patent review is intentionally unresolved
+## Resolved release decisions
 
-The project now uses the MIT License and records its SPDX identifier. Public disclosure can still affect patent novelty, so the independent patent gate remains active (`RELEASE-HOLD.md`; `tools/audit_release.py`, release checks).
+### SEC-002 — Patent disclosure decision
 
-Status: open patent decision; intentionally blocks public release.
+The owner explicitly decided not to seek patent protection for the currently published content and accepted the effect of public disclosure.
 
-## Low
+Status: resolved on 2026-07-22.
 
-### SEC-003 — Repository owner and URL placeholders remain
+### SEC-003 — Publisher, repository, and asset rights
 
-Installation instructions retain `OWNER/REPOSITORY` until a final public-safe publisher identity is selected. The release audit rejects this placeholder in release mode.
+The owner approved `xingxi0614-cpu/rednote-content-kit` for public visibility and confirmed the right to publish the code, documentation, original copy, and four reviewed example images. Commit metadata uses the GitHub-provided `noreply` identity.
 
-Status: expected pre-release state.
-
-Update: the private candidate now exists at `xingxi0614-cpu/rednote-content-kit`, so installation placeholders have been replaced. The public-release identity is still subject to final approval.
+Status: resolved on 2026-07-22.
 
 ## Verified controls
 
-- Input paths must be relative, cannot traverse parents, must stay inside the specification root, and cannot be symlinks (`build_handoff.py`, path validation section).
+- Input paths must be relative, cannot traverse parents, must stay inside the specification root, and cannot be symlinks.
 - Input files must use supported image suffixes, valid image signatures, and a maximum size of 32MB.
 - Output directories must be new or empty and cannot be symlinks, preventing accidental overwrite.
 - Generated manifests contain copied relative image paths and SHA-256 hashes rather than source-machine paths.
+- Chinese is the default handoff language; English is an explicit supported option, and unsupported language values are rejected.
 - Release auditing rejects caches, key material, archives, personal home paths, common credential formats, platform creator URLs, removed upload adapters, and browser automation dependencies.
+- Reviewed example PNGs use fixed names and dimensions and are checked for sensitive metadata markers.
 - CI has read-only repository permissions and pins third-party Actions to reviewed commit SHAs.
-- The private GitHub candidate has Dependabot vulnerability alerts and automated security fixes enabled. Secret scanning, push protection, and private vulnerability reporting were not available for the current private repository; this limitation is recorded in `docs/RELEASE.md` and does not weaken the local release gate.
-- No telemetry, network calls, platform credentials, login, upload, draft, scheduling, publishing, comment, or message features are included.
+- No telemetry, runtime network request, platform credential, login, upload, draft, scheduling, publishing, comment, or message feature is included.
 
 ## Verification commands
 
@@ -57,4 +56,4 @@ python3 tools/audit_release.py .
 python3 tools/audit_release.py . --release
 ```
 
-The first two commands must pass. The third must continue to fail until every release blocker is deliberately resolved.
+All three commands must pass for a public release.

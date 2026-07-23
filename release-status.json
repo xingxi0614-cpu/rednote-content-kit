@@ -1,9 +1,11 @@
 {
   "schema_version": 1,
-  "public_release_allowed": false,
+  "public_release_allowed": true,
   "license": "MIT",
-  "patent_review": "pending",
-  "asset_rights_review": "pending_final_review",
-  "publisher_identity": "pending",
-  "repository": "private_candidate_created"
+  "patent_review": "cleared_no_filing",
+  "asset_rights_review": "approved",
+  "publisher_identity": "approved",
+  "repository": "approved",
+  "visibility_change_approved": true,
+  "approval_date": "2026-07-22"
 }
